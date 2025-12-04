@@ -1,7 +1,8 @@
-const CACHE_NAME = 'logika-hantu-v1';
+const CACHE_NAME = 'logika-hantu-v2';
 const urlsToCache = [
     './',
     './index.html',
+    './style.css',
     './script.js',
     './manifest.json',
     './icon-192.png',
