@@ -3,103 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logika Selamat dari Hantu | PWA</title>
+    <title>Logika Bertahan Hidup (Hantu) PWA</title>
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#333333">
+    <meta name="theme-color" content="#212121">
 
-    <style>
-        body {
-            font-family: sans-serif;
-            background-color: #222;
-            color: #eee;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background-color: #333;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        h1 {
-            color: #ff5555;
-            border-bottom: 2px solid #555;
-            padding-bottom: 10px;
-        }
-        .input-group, .output-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        button {
-            background-color: #5cb85c;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #4cae4c;
-        }
-        #output {
-            background-color: #444;
-            padding: 15px;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .safe { color: #5cb85c; }
-        .danger { color: #ff5555; }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Logika Bertahan Hidup (Hantu)</h1>
-        <p>Gunakan logika untuk membuat keputusan yang menyelamatkanmu!</p>
+    <div class="haunted-container">
+        <header>
+            <h1>👻 Logika Bertahan Hidup (Hantu) 🏚️</h1>
+        </header>
 
-        <div class="input-group">
-            <h3>Keputusan Prasyarat:</h3>
-            <p>P: Lampu menyala. | Q: Pintu terkunci.</p>
+        <main class="game-area">
+            
+            <aside class="side-menu" id="main-menu-container">
+                <h2>Main Menu</h2>
+                <button id="level-1-btn" onclick="startGame(1)">Level 1: Dasar Logika</button>
+                <button id="level-2-btn" onclick="startGame(2)" disabled>Level 2: Kombinasi</button>
+                <button id="level-3-btn" onclick="startGame(3)" disabled>Level 3: Tautologi</button>
+                <button id="restart-btn" onclick="location.reload()">Restart Game</button>
+            </aside>
 
-            <label>
-                <input type="checkbox" id="p_val"> Lampu (P) menyala
-            </label><br>
-            <label>
-                <input type="checkbox" id="q_val"> Pintu (Q) terkunci
-            </label>
-        </div>
-        
-        <div class="input-group">
-            <h3>Pilihan Logika (Kunci Keselamatan):</h3>
-            <label for="logika_pilihan">Pilih Aksi Kunci Keselamatan:</label>
-            <select id="logika_pilihan">
-                <option value="p_and_q">1. Konjungsi (P ∧ Q): Lari HANYA jika Lampu menyala DAN Pintu terkunci</option>
-                <option value="p_or_q">2. Disjungsi (P ∨ Q): Lari jika Lampu menyala ATAU Pintu terkunci</option>
-                <option value="p_implies_q">3. Implikasi (P → Q): Lari jika Lampu menyala, MAKA Pintu terkunci</option>
-                <option value="not_p">4. Negasi (¬P): Lari jika Lampu TIDAK menyala</option>
-            </select>
-        </div>
+            <section class="game-content" id="game-content-area">
+                <h2>Selamat Datang!</h2>
+                <p>Pilih level di menu samping untuk memulai. Setiap level memiliki 3 tugas. Jawab dengan benar untuk menaklukkan Logika Hantu!</p>
+                <div class="logika-highlight">
+                    <p>Fokus: **Logika Proposisional (Konjungsi, Disjungsi, Implikasi, Biimplikasi, Negasi)**</p>
+                </div>
+            </section>
+        </main>
 
-        <button onclick="cekKeselamatan()">Cek Keselamatanmu!</button>
-
-        <div class="output-group">
-            <p>Hasil Logika (Kunci Keselamatan):</p>
-            <div id="output">Pilih aksi dan cek!</div>
-        </div>
+        <footer>
+            <p>© Game Logika-Hantu dibuat oleh Tabrizzi Aqlia</p>
+        </footer>
     </div>
-    
+
     <script src="script.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                // Gunakan path root '/' karena repositori GitHub Pages sering bekerja di root
-                // Jika tidak berhasil, ganti '/' dengan nama repositori Anda (misalnya: '/nama-repo/')
+                // Gunakan path root atau ganti dengan nama repositori Anda jika deployment gagal
                 navigator.serviceWorker.register('./service-worker.js') 
                     .then(reg => console.log('SW Registered:', reg.scope))
                     .catch(err => console.error('SW Failed:', err));
